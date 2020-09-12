@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SPARK_NCMS:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>SPARK_NCMS</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="SPARK_NCMS-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="SPARK_NCMS:war exploded" />
+    </root>
+  </artifact>
+</component>
