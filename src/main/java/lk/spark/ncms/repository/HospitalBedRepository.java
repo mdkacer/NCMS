@@ -9,10 +9,11 @@ import java.sql.SQLException;
 
 public class HospitalBedRepository {
 
-    public void admitPatient(String hospitalId, String patientId){
+    public String admitPatient(String hospitalId, String patientId){
         ResultSet rs = null;
         Connection con = null;
         PreparedStatement stmt = null;
+        int row = 0;
 
         try {
 
@@ -20,7 +21,7 @@ public class HospitalBedRepository {
             stmt = con.prepareStatement("UPDATE hospital_bed SET hospital_bed.patient_id = ? WHERE hospital_bed.hospital_id = ? AND hospital_bed.patient_id IS NULL LIMIT 1");
             stmt.setString(1, patientId);
             stmt.setString(2, hospitalId);
-//            rs = stmt.executeQuery();
+            row = stmt.executeUpdate();
         }catch (SQLException e){
 
             e.printStackTrace();
@@ -30,5 +31,6 @@ public class HospitalBedRepository {
             DBConnectionPool.getInstance().close(stmt);
             DBConnectionPool.getInstance().close(con);
         }
+        return (row > 0 ? "Patient Assign to a Bed Successfully" : patientId +" Can not Assign a Bed..!! " + hospitalId );
     }
 }

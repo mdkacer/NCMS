@@ -14,12 +14,23 @@ public class PatientQueueRepository {
         ResultSet rs = null;
         Connection con = null;
         PreparedStatement stmt = null;
-
+        String result = null;
+        int rows = 0;
+//        UUID uID = UUID.randomUUID();
+//        String uId = uID.toString();
         try {
 
             con = DBConnectionPool.getInstance().getConnection();
-            stmt = con.prepareStatement("INSERT INTO patient_queue patient_id VALUES (+ patientId +)");
+            stmt = con.prepareStatement("INSERT INTO patient_queue (patient_id) VALUES ('"+ patientId +"')");
+//            stmt.setInt(1, Integer.parseInt(uId));
+//            stmt.setString(2,patientId);
+            rows = stmt.executeUpdate();
+//            if (rows > 0){
 
+
+//            }else {
+//                result = patientId + " Could not Added to The Queue";
+//            }
         }catch (SQLException e){
 
             e.printStackTrace();
@@ -30,6 +41,7 @@ public class PatientQueueRepository {
             DBConnectionPool.getInstance().close(con);
         }
 
-        return "Patient Successfully Added to The Queue";
+        return  (rows > 0 ? "Patient Successfully Added to The Queue" : "Patient Could not Added to The Queue");
+//        return result;
     }
 }

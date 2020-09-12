@@ -25,7 +25,7 @@ public class UserRepository {
             stmt.setString(2, password);
             rs = stmt.executeQuery();
 
-            if(rs.getFetchSize() == 1){
+            if(rs.next() == true){
 
                 name = rs.getString("name");
 
@@ -33,6 +33,7 @@ public class UserRepository {
                 name = "User Loging Failed";
 
             }
+
         }catch (SQLException e){
 
             e.printStackTrace();

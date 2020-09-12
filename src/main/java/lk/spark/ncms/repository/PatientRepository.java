@@ -18,11 +18,11 @@ public class PatientRepository {
         PreparedStatement stmt = null;
 
         int resultPatient = 0;
-        UUID uId = null;
+        UUID uId = UUID.randomUUID();
 
         try {
 
-            uId = UUID.randomUUID();
+//            uId = UUID.randomUUID();
 
             con = DBConnectionPool.getInstance().getConnection();
             stmt = con.prepareStatement("INSERT INTO patient (id, first_name, last_name, district, location_x, location_y, gender, contact, email, age) VALUES (?,?,?,?,?,?,?,?,?,?)");

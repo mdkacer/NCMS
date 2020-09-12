@@ -21,7 +21,7 @@
 
     <servlet-mapping>
         <servlet-name>PatientServlet</servlet-name>
-        <url-pattern>/registerPatient</url-pattern>
+        <url-pattern>/registerPatient/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
