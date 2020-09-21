@@ -21,7 +21,7 @@ public class PatientServicelmpl implements PatientService {
             ArrayList<HospitalsWithBed> hospitalsWithBedArrayList;
             hospitalsWithBedArrayList = hospitalRepository.getHospitalsWithBeds();
 
-            if (!hospitalsWithBedArrayList.isEmpty()){
+            if (hospitalsWithBedArrayList.isEmpty()){
 
                 PatientQueueRepository patientQueueRepository = new PatientQueueRepository();
                 return patientQueueRepository.addToQueue(patientId);

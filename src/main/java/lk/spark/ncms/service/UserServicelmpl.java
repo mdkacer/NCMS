@@ -14,10 +14,10 @@ public class UserServicelmpl implements UserService {
     }
 
     @Override
-    public String signupUser(User userInformation){
+    public String signupUser(User userData){
 
         UserRepository userRepository = new UserRepository();
-        String result = userRepository.userSignup(userInformation);
+        String result = userRepository.userSignup(userData);
         return result;
     }
 }

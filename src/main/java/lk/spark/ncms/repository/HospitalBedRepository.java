@@ -31,6 +31,6 @@ public class HospitalBedRepository {
             DBConnectionPool.getInstance().close(stmt);
             DBConnectionPool.getInstance().close(con);
         }
-        return (row > 0 ? "Patient Assign to a Bed Successfully" : patientId +" Can not Assign a Bed..!! " + hospitalId );
+        return (row > 0 ? "Patient Assign to a Bed in " + hospitalId +" Successfully" : patientId +" Can not Assign a Bed..!! ");
     }
 }

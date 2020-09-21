@@ -27,7 +27,7 @@ public class UserRepository {
 
             if(rs.next() == true){
 
-                name = rs.getString("name");
+                name = "Welcome " + (rs.getString("name"));
 
             }else{
                 name = "User Loging Failed";
