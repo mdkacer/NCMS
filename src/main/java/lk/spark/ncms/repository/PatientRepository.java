@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class PatientRepository {
 
-    public String newPatient(Patient patientInformation){
+    public String addPatient(Patient patientInformation){
 
         ResultSet rs = null;
         Connection con = null;
@@ -48,6 +48,6 @@ public class PatientRepository {
             DBConnectionPool.getInstance().close(stmt);
             DBConnectionPool.getInstance().close(con);
         }
-        return resultPatient == 1 ? uId.toString() : "Patient Registration Failed..!!";
+        return resultPatient == 1 ? uId.toString() : null;
     }
 }

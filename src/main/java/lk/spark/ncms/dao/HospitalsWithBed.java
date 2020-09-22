@@ -2,7 +2,7 @@ package lk.spark.ncms.dao;
 
 public class HospitalsWithBed {
 
-    private String hospitalId;
+    private String hospitalId = "testService";
     private int xCoordinate;
     private int yCoordinate;
 //    private int bedNo;

@@ -65,20 +65,22 @@ public class HospitalRepository {
         ResultSet rs = null;
         Connection con = null;
         PreparedStatement stmt = null;
+        String id = null;
 //        int test = 0;
 
         ArrayList<HospitalsWithBed> hospitalWithBedDetails = new ArrayList<>();
         try {
 
             con = DBConnectionPool.getInstance().getConnection();
-            stmt = con.prepareStatement("SELECT DISTINCT (id, location_x, location_y) FROM hospital INNER JOIN hospital_bed ON hospital.id = hospital_bed.hospital_id AND hospital_bed.patient_id IS NULL ");
+            stmt = con.prepareStatement("SELECT DISTINCT (id, location_x, location_y) FROM hospital INNER JOIN hospital_bed WHERE hospital.id = hospital_bed.hospital_id AND hospital_bed.patient_id = NULL ");
             rs = stmt.executeQuery();
 //            test = stmt.getFetchSize();
+            id = rs.getString("id");
+
             while(rs.next()){
 
-                HospitalsWithBed hospitalsWithBed = new HospitalsWithBed(rs.getString("id"), rs.getInt("location_x"), rs.getInt("location_y"));
+                HospitalsWithBed hospitalsWithBed = new HospitalsWithBed(rs.getString(0), rs.getInt(1), rs.getInt(2));
                 hospitalWithBedDetails.add(hospitalsWithBed);
-
             }
 
         }catch (SQLException e){
@@ -91,6 +93,5 @@ public class HospitalRepository {
             DBConnectionPool.getInstance().close(con);
         }
         return hospitalWithBedDetails;
-
     }
 }

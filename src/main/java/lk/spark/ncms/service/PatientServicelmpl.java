@@ -14,35 +14,35 @@ public class PatientServicelmpl implements PatientService {
     @Override
     public String registerPatient(Patient patientInformation) {
         PatientRepository patientRepository = new PatientRepository();
-        String patientId = patientRepository.newPatient(patientInformation);
+        String patientId = patientRepository.addPatient(patientInformation);
 
-        if (!patientId.equals("Patient Registration Failed..!!")){
+        if (!patientId.equals(null)) {
             HospitalRepository hospitalRepository = new HospitalRepository();
             ArrayList<HospitalsWithBed> hospitalsWithBedArrayList;
             hospitalsWithBedArrayList = hospitalRepository.getHospitalsWithBeds();
 
-            if (hospitalsWithBedArrayList.isEmpty()){
-
+            if (hospitalsWithBedArrayList.isEmpty()) {
                 PatientQueueRepository patientQueueRepository = new PatientQueueRepository();
                 return patientQueueRepository.addToQueue(patientId);
+//                return hospitalsWithBedArrayList.get();
 
-            }else {
+            } else {
 
                 double distance = 0.0;
-                String hospitalId = null;
-//                String test = "test";
+                String hospitalId = "Hospital ID Servlet";
+                String test = "testPatientServlet";
 //                int i = 0;
-                for (HospitalsWithBed hospitalsWithBed : hospitalsWithBedArrayList){
+                for (HospitalsWithBed hospitalsWithBed : hospitalsWithBedArrayList) {
 //                    i++;
-                    double xDistance = (double)Math.pow(patientInformation.getxCoordinate() - hospitalsWithBed.getxCoordinate(),2);
-                    double yDistance = (double)Math.pow(patientInformation.getyCoordinate() - hospitalsWithBed.getyCoordinate(),2);
-                    double calculatedDistence = (double)Math.sqrt(xDistance + yDistance);
-//                        test = "For Loop " + i;
-                    if (distance == 0.0 || distance > calculatedDistence){
+                    double xDistance = (double) Math.pow(patientInformation.getxCoordinate() - hospitalsWithBed.getxCoordinate(), 2);
+                    double yDistance = (double) Math.pow(patientInformation.getyCoordinate() - hospitalsWithBed.getyCoordinate(), 2);
+                    double calculatedDistence = (double) Math.sqrt(xDistance + yDistance);
+                    test = "For Loop ";
+                    if (distance == 0.0 || distance > calculatedDistence) {
 
                         hospitalId = hospitalsWithBed.getHospitalId();
                         distance = calculatedDistence;
-//                        test =  (hospitalId + " sfsafgrg fdvbdfg rgerg " + distance);
+                        test = (hospitalId + " sfsafgrg fdvbdfg rgerg " + distance);
                     }
                 }
 
@@ -52,10 +52,9 @@ public class PatientServicelmpl implements PatientService {
             }
 
 
+        } else {
 
-        }else {
-
-            return patientId;
+            return "Patient Registration Failed..!!";
         }
 
 //        return null;
