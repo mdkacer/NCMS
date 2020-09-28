@@ -1,7 +1,8 @@
 package lk.spark.ncms.controller;
 
 import com.google.gson.JsonObject;
-import lk.spark.ncms.dao.User;
+import lk.spark.ncms.service.InputValidation;
+import lk.spark.ncms.service.InputValidationlmpl;
 import lk.spark.ncms.service.UserService;
 import lk.spark.ncms.service.UserServicelmpl;
 
@@ -23,13 +24,16 @@ public class UserServlet extends HttpServlet {
 
         if (accessType.equals("signup")){
 
-            User userInformation = new User(req.getParameter("userName"), req.getParameter("password"), req.getParameter("name"), Integer.parseInt(req.getParameter("moh")), Integer.parseInt(req.getParameter("hospital")));
-            String result = userService.signupUser(userInformation);
+//            User userInformation = new User(req.getParameter("userName"), req.getParameter("password"), req.getParameter("name"), Integer.parseInt(req.getParameter("moh")), Integer.parseInt(req.getParameter("hospital")));
+            InputValidation inputValidation = new InputValidationlmpl();
+            String result = (String) inputValidation.validationSignUpUser(req.getParameter("userName"), req.getParameter("password"), req.getParameter("name"), req.getParameter("moh"), req.getParameter("hospital"));
+//            String result = userService.signupUser(userInformation);
             this.sendResponse(result, resp);
 
         } else if (accessType.equals("signin")){
-
-            String result = userService.signinUser(req.getParameter("userName"), req.getParameter("password"));
+            InputValidation inputValidation = new InputValidationlmpl();
+            String result = (String) inputValidation.validationSignInUser(req.getParameter("userName"), req.getParameter("password"));
+//            String result = userService.signinUser(req.getParameter("userName"), req.getParameter("password"));
             this.sendResponse(result, resp);
         }
 //        super.doPost(req, resp);

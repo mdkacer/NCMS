@@ -1,9 +1,8 @@
 package lk.spark.ncms.controller;
 
 import com.google.gson.JsonObject;
-import lk.spark.ncms.dao.Patient;
-import lk.spark.ncms.service.PatientService;
-import lk.spark.ncms.service.PatientServicelmpl;
+import lk.spark.ncms.service.InputValidation;
+import lk.spark.ncms.service.InputValidationlmpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +18,11 @@ public class PatientServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Patient patientInformation = new Patient(req.getParameter("firstName"),req.getParameter("lastName"), req.getParameter("district"), Integer.parseInt(req.getParameter("locationX")), Integer.parseInt(req.getParameter("locationY")), req.getParameter("gender"), req.getParameter("contact"), req.getParameter("email"), Integer.parseInt(req.getParameter("age")));
-        PatientService patientService = new PatientServicelmpl();
-        String result = patientService.registerPatient(patientInformation);
+//        Patient patientInformation = new Patient(req.getParameter("firstName"),req.getParameter("lastName"), req.getParameter("district"), Integer.parseInt(req.getParameter("locationX")), Integer.parseInt(req.getParameter("locationY")), req.getParameter("gender"), req.getParameter("contact"), req.getParameter("email"), Integer.parseInt(req.getParameter("age")));
+        InputValidation inputValidation = new InputValidationlmpl();
+        String result = (String) inputValidation.validationPatientRegister(req.getParameter("firstName"),req.getParameter("lastName"), req.getParameter("district"), req.getParameter("locationX"), req.getParameter("locationY"), req.getParameter("gender"), req.getParameter("contact"), req.getParameter("email"), req.getParameter("age"));
+//        PatientService patientService = new PatientServicelmpl();
+//        String result = patientService.registerPatient(patientInformation);
         this.sendResponse(result, resp);
     }
 

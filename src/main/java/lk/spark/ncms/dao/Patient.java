@@ -26,6 +26,7 @@ public class Patient {
     }
 
     public String getFirstName() {
+
         return firstName;
     }
 
@@ -34,30 +35,37 @@ public class Patient {
     }
 
     public String getDistrict() {
+
         return district;
     }
 
     public int getxCoordinate() {
+
         return xCoordinate;
     }
 
     public int getyCoordinate() {
+
         return yCoordinate;
     }
 
     public String getGender() {
+
         return gender;
     }
 
     public String getContact() {
+
         return contact;
     }
 
     public String getEmail() {
+
         return email;
     }
 
     public int getAge() {
+
         return age;
     }
 }
